@@ -2,15 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone') {
+
+        stage('Build') {
             steps {
-                echo 'Cloning repository'
+                echo 'Building calculator app...'
             }
         }
 
         stage('Test') {
             steps {
                 sh 'python3 -m pytest'
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                sh 'python3 -m py_compile calculator.py'
             }
         }
     }
